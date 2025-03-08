@@ -37,8 +37,7 @@ function App() {
   const [guessedLetters, setGuessedLetters] = useState([]);
   // store incorrect letters in an array
   const [incorrectLetters, setIncorrectLetters] = useState([]); 
-  // track if the game is over in a boolean
-  const [isGameOver, setIsGameOver] = useState(false);
+
 
   // HANDLE FORM SUBMISSION
   const handleSubmit = (event) => {
@@ -59,14 +58,6 @@ function App() {
     }
   };
 
-  // CHECKS IF THE GAME IS OVER AND UPDATES ISGAMEOVER BOOLEAN ACCORDINGLY
-  useEffect(() => {
-    if (incorrectLetters.length > 5) {
-      setIsGameOver(true);  // Set the game over state
-      alert('Game Over! You have exceeded the maximum number of incorrect guesses.');
-    }
-  }, [incorrectLetters]);  // Trigger when incorrectLetters changes
-
 
   // RETURN STATEMENT
   return (
@@ -81,7 +72,7 @@ function App() {
         letter={letter} 
         setLetter={setLetter} 
         handleSubmit={handleSubmit} 
-        isGameOver={isGameOver}
+        incorrectLetters={incorrectLetters}
       />
     </>
   )
