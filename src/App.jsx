@@ -77,26 +77,12 @@ function App() {
         <p>Guessed Letters: {guessedLetters.join(", ")}</p>
         <IncorrectLetters incorrectLetters = {incorrectLetters}/>
       </div>
-      <form onSubmit={handleSubmit}> 
-        <input 
-          type="text" 
-          placeholder="Enter A Letter: "
-          value={letter}
-          // allow only one lowercase letter
-          onChange={(e) => {
-            const value = e.target.value;
-            if (/[a-z]/.test(value)) {  
-              setLetter(value);
-            }
-          }}
-          // ensures only one character can be typed
-          maxLength={1}  
-          // disable input when game is over
-          disabled={isGameOver}/>  
-        <input type="submit" 
-          value="Submit" 
-          disabled={isGameOver}/>
-      </form>
+      <InputForm 
+        letter={letter} 
+        setLetter={setLetter} 
+        handleSubmit={handleSubmit} 
+        isGameOver={isGameOver}
+      />
     </>
   )
 }
