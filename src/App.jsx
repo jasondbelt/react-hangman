@@ -3,7 +3,7 @@ import './App.css'
 // import words from "./words.json"
 import axios from "axios"
 import DisplayPuzzle from './components/DisplayPuzzle'
-import IncorrectLetters from './components/IncorrectLetters'
+import {AllLetters, IncorrectLetters} from './components/DisplayLetters'
 import InputForm from './components/InputForm'
 
 
@@ -20,18 +20,19 @@ function App() {
   const fetchRandomWord = async () => {
     try {
       const { data } = await axios.get('https://random-word-api.herokuapp.com/word?number=1');
+      // console.log(data)
       setPuzzle(data[0]);
     } catch (error) {
       console.error('Error fetching random word:', error);
     }
   };
-  // Call the fetchRandomWord function when the component mounts
+  // Call the fetchRandomWord function only when its first rendered
   useEffect(() => {
     fetchRandomWord();
   }, []);
 
   
-  // SETTING LETTERS, GUESSSED LETTERS, INCORRECT LETTERS, and ISGAMEOVER STATES
+  // SETTING LETTERS, GUESSSED LETTERS, and INCORRECT LETTERS
   const [letter, setLetter] = useState('');
   // store guessed letters in an array
   const [guessedLetters, setGuessedLetters] = useState([]);
@@ -46,12 +47,12 @@ function App() {
     if (guessedLetters.includes(letter)){
       // alert user and clear input field
       alert('You Already Guessed That Letter')
-      setLetter("");
+      setLetter('');
       return
     }
-    // append new letter to guessedLetters array
+    // append new letter to guessedLetters array and clear input field
     setGuessedLetters([...guessedLetters, letter]);
-    setLetter(""); // Clear input field
+    setLetter('');
     // // append incorrect letter to incorrectLetters array
     if (!puzzle.includes(letter)) {
       setIncorrectLetters([...incorrectLetters, letter]);
@@ -65,8 +66,8 @@ function App() {
       <h1>Hangman</h1>
       <div>
         <DisplayPuzzle puzzle={puzzle} guessedLetters={guessedLetters}/>
-        <p>Guessed Letters: {guessedLetters.join(", ")}</p>
-        <IncorrectLetters incorrectLetters = {incorrectLetters}/>
+        <AllLetters guessedLetters={guessedLetters} />  
+        <IncorrectLetters incorrectLetters={incorrectLetters}/>  
       </div>
       <InputForm 
         letter={letter} 

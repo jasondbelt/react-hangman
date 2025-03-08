@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 
-
 const InputForm = ({ letter, setLetter, handleSubmit, incorrectLetters}) => {
   // track if the game is over in a boolean
   const [isGameOver, setIsGameOver] = useState(false);
 
+  // set isGameOver state to true when user exceeds 5 guesses
   useEffect(() => {
     if (incorrectLetters.length > 5) {
-      setIsGameOver(true);  // Set the game over state
+      setIsGameOver(true);
       alert('Game Over! You have exceeded the maximum number of incorrect guesses.');
     }
-  }, [incorrectLetters]);  // Trigger when incorrectLetters changes
+  }, [incorrectLetters]); 
+  
   return (
     <form onSubmit={handleSubmit}> 
       <input 
@@ -19,18 +20,14 @@ const InputForm = ({ letter, setLetter, handleSubmit, incorrectLetters}) => {
         value={letter}
         onChange={(e) => {
           const value = e.target.value;
-          if (/[a-z]/.test(value)) {  
-            setLetter(value);
-          }
+          /^[a-z]$/.test(value) ? setLetter(value) : setLetter('');
         }}
         maxLength={1}  
-        disabled={isGameOver}  
-      />  
+        disabled={isGameOver}/>  
       <input 
         type="submit" 
         value="Submit" 
-        disabled={isGameOver}
-      />
+        disabled={isGameOver}/>
     </form>
   );
 };
