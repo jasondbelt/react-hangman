@@ -1,11 +1,12 @@
-const displayPuzzle = ({ puzzle }) => {
-  // const letters = puzzle.split('');
-  return (
-    <div>
-      <h3>Incomplete Puzzle</h3>
-      <p>{puzzle}</p>
-    </div>
-  )
-}
+// initially displays puzzle with underscores, reveals letters as they are guessed
+const DisplayPuzzle = ({ puzzle, guessedLetters }) => {
+  const displayPuzzle = puzzle
+    .split('')
+    .map((char) => (guessedLetters.includes(char) ? char : '_'))
+    .join(' ');
 
-export default displayPuzzle
+  return <p>{displayPuzzle}</p>;
+};
+
+
+export default DisplayPuzzle;

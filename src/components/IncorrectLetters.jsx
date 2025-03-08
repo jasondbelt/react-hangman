@@ -1,9 +1,7 @@
-const IncorrectLetters = () => {
-    return (
-      <div>
-        <h3>Incorrect Letters</h3>
-      </div>
-    )
-}
+const IncorrectLetters = ({ incorrectLetters }) => {
+  return (
+    <p>Incorrect Letters: {incorrectLetters.join(', ')}</p>
+  );
+};
 
-export default IncorrectLetters
+export default IncorrectLetters;

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 // import words from "./words.json"
 import axios from "axios"
-// import displayPuzzle from './components/DisplayPuzzle'
+import DisplayPuzzle from './components/DisplayPuzzle'
 import IncorrectLetters from './components/IncorrectLetters'
 import InputForm from './components/InputForm'
 
@@ -40,14 +40,6 @@ function App() {
   // track if the game is over in a boolean
   const [isGameOver, setIsGameOver] = useState(false);
 
-
-  // DISPLAY PUZZLE WITH UNDERSCORES FOR UNGUESSED LETTERS
-  const displayPuzzle = puzzle
-    .split('')
-    .map((char) => (guessedLetters.includes(char) ? char : '_'))
-    .join(' ');
-   
-
   // HANDLE FORM SUBMISSION
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -81,9 +73,9 @@ function App() {
     <>
       <h1>Hangman</h1>
       <div>
-        <p>{displayPuzzle}</p>
+        <DisplayPuzzle puzzle={puzzle} guessedLetters={guessedLetters}/>
         <p>Guessed Letters: {guessedLetters.join(", ")}</p>
-        <p>Incorrect Letters: {incorrectLetters.join(", ")}</p>
+        <IncorrectLetters incorrectLetters = {incorrectLetters}/>
       </div>
       <form onSubmit={handleSubmit}> 
         <input 
