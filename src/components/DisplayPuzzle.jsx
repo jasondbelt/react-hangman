@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 // initially displays puzzle with underscores, reveals letters as they are guessed
-const DisplayPuzzle = ({ puzzle, guessedLetters }) => {
-  // track if the game is over in a boolean
-  const [isGameOver, setIsGameOver] = useState(false);
+const DisplayPuzzle = ({ puzzle, guessedLetters, isGameOver, setIsGameOver }) => {
   
+  // console.log(puzzle)
   const displayPuzzle = puzzle
     .split('')
     .map((char) => (guessedLetters.includes(char) ? char : '_'))
@@ -17,7 +16,7 @@ const DisplayPuzzle = ({ puzzle, guessedLetters }) => {
       setIsGameOver(true);
       alert('Congratulations! You solved the puzzle!');
     }
-  }, [displayPuzzle, guessedLetters, isGameOver]); 
+  }, [displayPuzzle, guessedLetters, isGameOver, setIsGameOver]); 
 
   return <p>{displayPuzzle}</p>;
 };

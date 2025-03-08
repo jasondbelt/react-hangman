@@ -1,9 +1,7 @@
 // convert guessedLetters and incorrectLetters for display
-
-export const AllLetters = ({ guessedLetters }) => {
-  // boolean ensures empty characters aren't displayed
+export const AllGuessedLetters = ({ guessedLetters }) => {
   return (
-    <p>Guessed Letters: {guessedLetters.filter(Boolean).join(', ')}</p>
+    <p>Guessed Letters: {guessedLetters.join(', ')}</p>
   );
 };
 
